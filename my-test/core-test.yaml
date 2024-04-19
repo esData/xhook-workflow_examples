@@ -1,0 +1,15 @@
+---
+name: core-test
+summary: Playground
+description: Do anything
+uri: https://github.com/esDataCo/tree/master/co-test
+publish: private
+
+steps:
+  test_01:
+    step: hashicorp-vault_kv_put
+    parameters:
+      # token: my-test/core-test.yaml
+      path: secret/data/users/cheehuan@esdata.co/accounts/rLeDBQCWZBtJL3RrKCuLsBzNBaazzrLwBW
+      data:
+        secret: saNidQ8MnaDtpeSYz9eKdEJvXezQ1

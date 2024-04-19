@@ -1,0 +1,31 @@
+---
+name: ripple-remove_hook
+summary: Ripple remove hook
+description: This workflow simple remove hook
+uri: https://github.com/esDataCo/tree/master/ripple-remove_hook
+action_bound: both
+invokes:
+  - ttPAYMENT
+  - ttACCOUNT_SET
+tags:
+  - remove_hook
+  - remove_signers
+publish: public
+
+parameters:
+  environment: hooks-testnet-v2.xrpl-labs.com
+  secret: spy64rAgyfuZ9Ds2R27ctKt2uyMeU
+
+steps:
+  account_info_01:
+    step: ripple-account_info
+  remove_signer_01:
+    step: ripple-remove_signers
+    dependsOn: account_info_01
+    parameters:
+      account_sequence: $[steps.account_info_01.outputs.Sequence]   
+  remove_hook_01:
+    step: ripple-remove_hook
+    dependsOn: remove_signer_01
+    parameters:
+      account_sequence: ?[$[steps.account_info_01.outputs.Sequence] + 1]
